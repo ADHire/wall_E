@@ -17,10 +17,14 @@ function Rover(pos, dir) {
     });
 
   };
+  this.obstacle = [];
+
 
   // Movement functionality
 
   function movement(command) {
+
+    obstacleCheck();
 
     console.log('moving ' + command);
 
@@ -85,9 +89,30 @@ function Rover(pos, dir) {
 
   }
 
+  // Randomly selecting obstacles
+  rover.obstacle[0] = Math.floor(Math.random() * (10 - 0 + 1)) + 0;
+  rover.obstacle[1] = Math.floor(Math.random() * (10 - 0 + 1)) + 0;
+
+
+  // Obstacle check function -- not exactly working at the moment
+  function obstacleCheck() {
+
+    console.log('checking for obstacles');
+    console.log(rover.obstacle);
+    console.log(rover.pos);
+
+    if(rover.pos[0] && rover.pos[1] === rover.obstacle[0] && rover.obstacle[1]) {
+      console.log('An obstacle has been found');
+    } else {
+      console.log('Free to move forward');
+    }
+
+  }
+
 
 };
 
-var wall_E = new Rover([-1, -1], 'north');
-rover.command('b');
+// Creation/tests
+var wall_E = new Rover([0, 0], 'north');
+rover.command('f');
 console.log(wall_E.pos + ' ' + wall_E.dir);
