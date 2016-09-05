@@ -4,9 +4,39 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <link rel="stylesheet" href="rover.css">
+  <title>Rover Test</title>
 </head>
 <body>
+  <div class="centered" id='initForm'>
+    <form>
+      <h3>Please enter coordinates and a direction for our rover</h3>
+      <label for="posOne">X Coordinate  </label><input id='posOne' maxlength=2 size=2>
+      <label for="posTwo">Y Coordinate  </label><input id='posTwo' maxlength=2 size=2>
+      <label for="dir">Direction  </label><input id='dir'>
+      <button type="button" onclick="create()">Start it up!</button>
+      <ul>
+        <li>X and Y coordinates only accept two digit intergers</li>
+        <li>Only use the four cardinal directions</li>
+      </ul>
+    </form>
+  </div>
+
+  <div id='commForm' class='hidden'>
+    <h3>Great, so you've set up your rover! How about we move our friend around?</h3>
+    <h4 id='roverData'></h4>
+    <h4 id='updatedRover'></h4>
+    <input type="text" placeholder="Command(s)" id='commands' required>
+    <button type='button' onclick='commandRover()'>Send Commands!</button>
+    <p>You can command the rover by entering these four commands:</p>
+    <ul>
+      <li>F - Forward</li>
+      <li>B - Back</li>
+      <li>R - Right</li>
+      <li>L - Left</li>
+    </ul>
+  </div>
+
 
   <script src="rover.js"></script>
 </body>

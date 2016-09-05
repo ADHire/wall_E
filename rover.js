@@ -1,5 +1,4 @@
 // Start of object constructor for our rover
-
 function Rover(pos, dir) {
   rover = this;
   this.pos = pos;
@@ -17,16 +16,11 @@ function Rover(pos, dir) {
     });
 
   };
-  this.obstacle = [];
 
 
   // Movement functionality
 
   function movement(command) {
-
-    obstacleCheck();
-
-    console.log('moving ' + command);
 
     var xAxis = 0;
     var yAxis = 0;
@@ -52,11 +46,10 @@ function Rover(pos, dir) {
   }
 
 
+
   // Turning functionality
 
   function turning(command) {
-
-    console.log('turning ' + command);
 
     var rightTurn = command === 'r';
     var leftTurn = command === 'l';
@@ -89,30 +82,67 @@ function Rover(pos, dir) {
 
   }
 
-  // Randomly selecting obstacles
-  rover.obstacle[0] = Math.floor(Math.random() * (10 - 0 + 1)) + 0;
-  rover.obstacle[1] = Math.floor(Math.random() * (10 - 0 + 1)) + 0;
-
-
-  // Obstacle check function -- not exactly working at the moment
-  function obstacleCheck() {
-
-    console.log('checking for obstacles');
-    console.log(rover.obstacle);
-    console.log(rover.pos);
-
-    if(rover.pos[0] && rover.pos[1] === rover.obstacle[0] && rover.obstacle[1]) {
-      console.log('An obstacle has been found');
-    } else {
-      console.log('Free to move forward');
-    }
-
-  }
-
-
 };
+
+
 
 // Creation/tests
 var wall_E = new Rover([0, 0], 'north');
-rover.command('f');
-console.log(wall_E.pos + ' ' + wall_E.dir);
+
+
+
+
+
+// Messing around with dynamically creating an object via inputs
+// Creates a new rover via three initial inputs on page
+var newRover;
+
+function create() {
+
+  var defPosOne = Number(document.getElementById('posOne').value);
+  var defPosTwo = Number(document.getElementById('posTwo').value);
+  var defPos = [defPosOne, defPosTwo];
+  var defDir = document.getElementById('dir').value.toLowerCase();
+
+  newRover = new Rover(defPos, defDir);
+
+  var outPutInfo = 'Your rover is at ' + newRover.pos[0] + ', ' + newRover.pos[1] + ' facing ' + newRover.dir;
+  var roverEl = document.getElementById('roverData');
+
+  roverEl.innerText = outPutInfo;
+
+  document.getElementById('initForm').style.display = 'none';
+  document.getElementById('commForm').removeAttribute('class', 'hidden');
+
+  reset();
+
+}
+
+// Allows user to input commands to move the rover
+function commandRover() {
+
+  var defCommands = document.getElementById('commands').value.toLowerCase();
+
+  newRover.command(defCommands);
+
+  var outPutInfoTwo = 'Your rover has moved to ' + newRover.pos[0] + ', ' + newRover.pos[1] + ' facing ' + newRover.dir;
+  var roverElTwo = document.getElementById('updatedRover');
+
+  roverElTwo.innerText = outPutInfoTwo;
+
+  document.getElementById('roverData').setAttribute('class', 'hidden');
+
+  reset();
+
+}
+
+
+// Resets input fields
+function reset() {
+
+  var defPosOne = document.getElementById('posOne').value = '';
+  var defPosTwo = document.getElementById('posTwo').value = '';
+  var defDir = document.getElementById('dir').value = '';
+  var defCommands = document.getElementById('commands').value = '';
+
+}
