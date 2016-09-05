@@ -49,10 +49,39 @@ function Rover(pos, dir) {
 
     console.log('turning ' + command);
 
+    var rightTurn = command === 'r';
+    var leftTurn = command === 'l';
+    var northFace = rover.dir === 'north';
+    var eastFace = rover.dir === 'east';
+    var southFace = rover.dir === 'south';
+    var westFace = rover.dir === 'west';
+
+    // I feel like a switch statement could be in order? I don't want to spend too much time refactoring this at the moment. Will revisit if I have time.
+    if(rightTurn && northFace) {
+      rover.dir = 'east';
+    } else if(rightTurn && eastFace) {
+      rover.dir = 'south';
+    } else if(rightTurn && southFace) {
+      rover.dir = 'west';
+    } else if(rightTurn && westFace) {
+      rover.dir = 'north';
+    };
+
+    // Note to self: see line 59
+    if(leftTurn && northFace) {
+      rover.dir = 'west';
+    } else if(leftTurn && eastFace) {
+      rover.dir = 'north';
+    } else if(leftTurn && southFace) {
+      rover.dir = 'east';
+    } else if(leftTurn && westFace) {
+      rover.dir = 'south';
+    };
+
   }
 
 };
 
 var wall_E = new Rover([0, 0], 'north');
-rover.command('ff');
+rover.command('frrf');
 console.log(wall_E.pos);
