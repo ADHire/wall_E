@@ -37,6 +37,11 @@ function Rover(pos, dir) {
       xAxis = +1;
     }
 
+    if(command === 'b') {
+      yAxis *= -1;
+      xAxis *= -1;
+    }
+
     rover.pos[0] += xAxis;
     rover.pos[1] += yAxis;
 
@@ -80,8 +85,9 @@ function Rover(pos, dir) {
 
   }
 
+
 };
 
-var wall_E = new Rover([0, 0], 'north');
-rover.command('frrf');
-console.log(wall_E.pos);
+var wall_E = new Rover([-1, -1], 'north');
+rover.command('b');
+console.log(wall_E.pos + ' ' + wall_E.dir);
