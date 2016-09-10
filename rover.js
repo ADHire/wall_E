@@ -1,32 +1,49 @@
 // Start of object constructor for our rover
 
 function Rover(pos, dir) {
+
   rover = this;
+
+  // Assigns our rover's position
+
   this.pos = pos;
+
+  // Assigns our rover's direction
+
   this.dir = dir;
+
+  // Function to accept an array of commands and run the rover's commands
+
   this.command = function(commands) {
 
-    var commandList = commands.split('');
+    var commandList = commands.toString('');
 
-    commandList.forEach(function(command) {
+    for(var i = 0; i < commandList.length; i++) {
+
+      var command = commandList.charAt(i);
+
       if(command === 'f' || command === 'b') {
-        movement(command);
+        rover.movement(command);
       } else if(command === 'r' || command === 'l') {
-        turning(command);
-      };
-    });
+        rover.turning(command);
+      }
+      
+    };
 
-  };
+  }
+
+  // Created an array for the obstacle. Code to randomize a location is below
+
   this.obstacle = [];
+
+  // Randomly selecting obstacles
+  rover.obstacle[0] = Math.floor(Math.random() * (2 - 0 + 1)) + 0;
+  rover.obstacle[1] = Math.floor(Math.random() * (2 - 0 + 1)) + 0;
 
 
   // Movement functionality
 
-  function movement(command) {
-
-    obstacleCheck();
-
-    console.log('moving ' + command);
+  this.movement = function(command) {
 
     var xAxis = 0;
     var yAxis = 0;
@@ -49,14 +66,13 @@ function Rover(pos, dir) {
     rover.pos[0] += xAxis;
     rover.pos[1] += yAxis;
 
-  }
+    rover.obstacleCheck();
 
+  }
 
   // Turning functionality
 
-  function turning(command) {
-
-    console.log('turning ' + command);
+  this.turning = function(command) {
 
     var rightTurn = command === 'r';
     var leftTurn = command === 'l';
@@ -65,7 +81,6 @@ function Rover(pos, dir) {
     var southFace = rover.dir === 'south';
     var westFace = rover.dir === 'west';
 
-    // I feel like a switch statement could be in order? I don't want to spend too much time refactoring this at the moment. Will revisit if I have time.
     if(rightTurn && northFace) {
       rover.dir = 'east';
     } else if(rightTurn && eastFace) {
@@ -76,7 +91,6 @@ function Rover(pos, dir) {
       rover.dir = 'north';
     };
 
-    // Note to self: see line 59
     if(leftTurn && northFace) {
       rover.dir = 'west';
     } else if(leftTurn && eastFace) {
@@ -89,30 +103,20 @@ function Rover(pos, dir) {
 
   }
 
-  // Randomly selecting obstacles
-  rover.obstacle[0] = Math.floor(Math.random() * (10 - 0 + 1)) + 0;
-  rover.obstacle[1] = Math.floor(Math.random() * (10 - 0 + 1)) + 0;
+  // Obstacle check functionality
 
+  this.obstacleCheck = function() {
 
-  // Obstacle check function -- not exactly working at the moment
-  function obstacleCheck() {
-
-    console.log('checking for obstacles');
-    console.log(rover.obstacle);
-    console.log(rover.pos);
-
-    if(rover.pos[0] && rover.pos[1] === rover.obstacle[0] && rover.obstacle[1]) {
-      console.log('An obstacle has been found');
-    } else {
-      console.log('Free to move forward');
+    if(rover.obstacle.toString() === rover.pos.toString()) {
+      console.log('An obstacle has been found. Please find another route.');
+      rover.movement('b');
     }
 
   }
 
 
-};
+}; // End of object constructor
+
 
 // Creation/tests
 var wall_E = new Rover([0, 0], 'north');
-rover.command('f');
-console.log(wall_E.pos + ' ' + wall_E.dir);
