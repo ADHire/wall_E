@@ -69,7 +69,7 @@ function Rover(pos, dir) {
     rover.obstacleCheck();
     rover.victoryCheck();
 
-    console.log('Wall_E is now at ' + rover.pos + ' facing ' + rover.dir);
+    console.log('Wall_E is now at ' + '[' + rover.pos[0] + ', ' + rover.pos[1] + ']' + ' facing ' + rover.dir);
 
   }
 
