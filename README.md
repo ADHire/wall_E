@@ -24,7 +24,7 @@ wall_E.command(['ffrff']);
 This will move the robot forward twice, make a right turn, and move it forward twice more.
 
 
-As you move, your console will display the rovers coordinates and position.
+As you move, your console will display the rover's coordinates and position.
 
 If you encounter an obstacle, the rover will back up and you will need to pass it new commands.
 
@@ -40,4 +40,4 @@ console.log(wall_E.victory);
 
 
 
-My next step will be to tie in a front-end for users to input information via input elements and move the rover with button clicks.
+My next step will be to tie in a front-end for users to input information via input elements and move the rover with button clicks. 
