@@ -31,4 +31,6 @@ If you encounter an obstacle, the rover will back up and you will need to pass i
 If you find the victory point, you will receive an alert.
 
 
-My next step will be to tie in a front-end for users to input information via input elements.
+
+
+My next step will be to tie in a front-end for users to input information via input elements and move the rover with button clicks.
