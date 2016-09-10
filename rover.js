@@ -144,8 +144,8 @@ function Rover(pos, dir) {
 
 
 // Creation/tests
-var wall_E = new Rover([0, 0], 'n');
+// var wall_E = new Rover([0, 0], 'n');
 
 
 // Testing commands
-wall_E.command(['ffff']);
+// wall_E.command(['ffff']);
