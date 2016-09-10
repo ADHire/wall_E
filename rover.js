@@ -27,7 +27,7 @@ function Rover(pos, dir) {
       } else if(command === 'r' || command === 'l') {
         rover.turning(command);
       }
-      
+
     };
 
   }
@@ -35,7 +35,6 @@ function Rover(pos, dir) {
   // Created an array for the obstacle. Code to randomize a location is below
 
   this.obstacle = [];
-
   // Randomly selecting obstacles
   rover.obstacle[0] = Math.floor(Math.random() * (2 - 0 + 1)) + 0;
   rover.obstacle[1] = Math.floor(Math.random() * (2 - 0 + 1)) + 0;
