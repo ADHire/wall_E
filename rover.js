@@ -149,17 +149,36 @@ function Rover(pos, dir) {
 
   this.edge = function() {
 
-    if(rover.pos[0] < rover.gridY[0]) {
-      console.log('turning you around');
+    if(rover.pos[0] > rover.gridX[1] && rover.dir === 'e') {
+      console.log('Cannot move forwards off the map. Turning you around.');
+      rover.dir = 'w';
+      rover.movement('f');
+    } else if(rover.pos[0] > rover.gridX[1] && rover.dir === 'w') {
+      console.log('Cannot back up any more. Please move forward');
+      rover.movement('f');
+    } else if(rover.pos[0] < rover.gridX[0] && rover.dir === 'w') {
+      console.log('Cannot move forwards off the map. Turning you around.');
       rover.dir = 'e';
-    } || rover.pos[0] > rover.gridY[1]) {
-      console.log('dont fall off!');
-      rover.movement('b');
+      rover.movement('f');
+    } else if(rover.pos[0] < rover.gridX[0] && rover.dir === 'e') {
+      console.log('Cannot back up any more. Please move forward');
+      rover.movement('f');
     }
 
-    if(rover.pos[1] < rover.gridX[0] || rover.pos[1] > rover.gridX[1]) {
-      console.log('dont fall off!');
-      rover.movement('b');
+    if(rover.pos[1] > rover.gridY[1] && rover.dir === 'n') {
+      console.log('Cannot move forwards off the map. Turning you around.');
+      rover.dir = 's';
+      rover.movement('f');
+    } else if(rover.pos[1] > rover.gridY[1] && rover.dir === 's') {
+      console.log('Cannot back up any more. Please move forward');
+      rover.movement('f');
+    } else if(rover.pos[1] < rover.gridY[0] && rover.dir === 's') {
+      console.log('Cannot move forwards off the map. Turning you around.');
+      rover.dir = 'n';
+      rover.movement('f');
+    } else if(rover.pos[1] < rover.gridY[0] && rover.dir === 'n') {
+      console.log('Cannot back up any more. Please move forward');
+      rover.movement('f');
     }
 
   };
