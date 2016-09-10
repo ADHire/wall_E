@@ -31,6 +31,13 @@ If you encounter an obstacle, the rover will back up and you will need to pass i
 If you find the victory point, you will receive an alert.
 
 
+You can check the obstacle and victory coordinates with the following code:
+
+```javascript
+console.log(wall_E.obstacle);
+console.log(wall_E.victory);
+```
+
 
 
 My next step will be to tie in a front-end for users to input information via input elements and move the rover with button clicks.
