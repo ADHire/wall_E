@@ -13,7 +13,7 @@ To move the rover around, you would access the command function. There are four 
 * Forward = 'f'
 * Back = 'b'
 * Right = 'r'
-* left = 'l'
+* Left = 'l'
 
 Example of moving:
 
@@ -25,7 +25,9 @@ This will move the robot forward twice, make a right turn, and move it forward t
 
 
 As you move, your console will display the rovers coordinates and position.
+
 If you encounter an obstacle, the rover will back up and you will need to pass it new commands.
+
 If you find the victory point, you will receive an alert.
 
 
