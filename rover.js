@@ -1,4 +1,4 @@
-// Start of object constructor for our rover
+// Start of object prototype for our rover
 
 function Rover(pos, dir) {
 
@@ -6,11 +6,11 @@ function Rover(pos, dir) {
 
   // Assigns our rover's position
 
-  this.pos = pos;
+  this.pos = pos || [0, 0];
 
   // Assigns our rover's direction
 
-  this.dir = dir;
+  this.dir = dir || 'n';
 
   // Function to accept an array of commands and run the rover's commands
 
@@ -28,9 +28,9 @@ function Rover(pos, dir) {
         rover.turning(command);
       }
 
-    };
+    }
 
-  }
+  };
 
   // Created an array for the obstacle. Code to randomize a location is below
 
@@ -71,7 +71,7 @@ function Rover(pos, dir) {
 
     console.log('Wall_E is now at ' + '[' + rover.pos[0] + ', ' + rover.pos[1] + ']' + ' facing ' + rover.dir);
 
-  }
+  };
 
   // Turning functionality
 
@@ -92,7 +92,7 @@ function Rover(pos, dir) {
       rover.dir = 'w';
     } else if(rightTurn && westFace) {
       rover.dir = 'n';
-    };
+    }
 
     if(leftTurn && northFace) {
       rover.dir = 'w';
@@ -102,11 +102,11 @@ function Rover(pos, dir) {
       rover.dir = 'e';
     } else if(leftTurn && westFace) {
       rover.dir = 's';
-    };
+    }
 
     console.log('Wall_E is now facing ' + rover.dir);
 
-  }
+  };
 
   // Obstacle check functionality
 
@@ -137,15 +137,6 @@ function Rover(pos, dir) {
       rover.victory = [ (Math.floor(Math.random() * (10 - 0) + 1)), (Math.floor(Math.random() * (10 - 0) + 1))  ];
     }
 
-  }
+  };
 
-
-}; // End of object constructor
-
-
-// Creation/tests
-// var wall_E = new Rover([0, 0], 'n');
-
-
-// Testing commands
-// wall_E.command(['ffff']);
+} // End of object prototype
