@@ -12,6 +12,11 @@ function Rover(pos, dir) {
 
   this.dir = dir || 'n';
 
+  // Max grid size allowed currently
+
+  this.gridX = [-20, 20];
+  this.gridY = [-20, 20];
+
   // Function to accept an array of commands and run the rover's commands
 
   this.command = function(commands) {
@@ -65,6 +70,7 @@ function Rover(pos, dir) {
     rover.pos[0] += xAxis;
     rover.pos[1] += yAxis;
 
+    rover.edge();
     rover.scramble();
     rover.obstacleCheck();
     rover.victoryCheck();
@@ -135,6 +141,25 @@ function Rover(pos, dir) {
 
     if(rover.victory.toString() === rover.obstacle.toString()) {
       rover.victory = [ (Math.floor(Math.random() * (10 - 0) + 1)), (Math.floor(Math.random() * (10 - 0) + 1))  ];
+    }
+
+  };
+
+  // Edge of map functionality
+
+  this.edge = function() {
+
+    if(rover.pos[0] < rover.gridY[0]) {
+      console.log('turning you around');
+      rover.dir = 'e';
+    } || rover.pos[0] > rover.gridY[1]) {
+      console.log('dont fall off!');
+      rover.movement('b');
+    }
+
+    if(rover.pos[1] < rover.gridX[0] || rover.pos[1] > rover.gridX[1]) {
+      console.log('dont fall off!');
+      rover.movement('b');
     }
 
   };
