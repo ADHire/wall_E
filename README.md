@@ -10,10 +10,10 @@ var wall_E = new Rover([0, 0], 'n');
 
 
 To move the rover around, you would access the command function. There are four commands
---* Forward = 'f'
---* Back = 'b'
---* Right = 'r'
---* left = 'l'
+* Forward = 'f'
+* Back = 'b'
+* Right = 'r'
+* left = 'l'
 
 Example of moving:
 
