@@ -2,13 +2,21 @@
 
 This allows users to create a rover with an initial location and a direction.
 
-Example of creation: var wall_E = new Rover([0, 0], 'n');
+Example of creation:
+
+```javascript
+var wall_E = new Rover([0, 0], 'n');
+```
 
 
 To move the rover around, you would access the command function. There are four commands
 Forward = 'f', back = 'b', right = 'r', left = 'l'
 
-Example of moving: wall_E.command(['ffrff']);
+Example of moving:
+
+```javascript
+wall_E.command(['ffrff']);
+```
 
 This will move the robot forward twice, make a right turn, and move it forward twice more.
 
@@ -18,4 +26,4 @@ If you encounter an obstacle, the rover will back up and you will need to pass i
 If you find the victory point, you will receive an alert.
 
 
-My next step will be to tie in a front-end for users to input information via input elements. 
+My next step will be to tie in a front-end for users to input information via input elements.
