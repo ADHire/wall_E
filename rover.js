@@ -34,11 +34,11 @@ function Rover(pos, dir) {
 
   // Created an array for the obstacle. Code to randomize a location is below
 
-  this.obstacle = [];
-  // Randomly selecting obstacles
-  rover.obstacle[0] = Math.floor(Math.random() * (2 - 0 + 1)) + 0;
-  rover.obstacle[1] = Math.floor(Math.random() * (2 - 0 + 1)) + 0;
+  this.obstacle = [ (Math.floor(Math.random() * (10 - 0) + 1)), (Math.floor(Math.random() * (10 - 0) + 1)) ];
 
+  // Created a victory point
+
+  this.victory = [ (Math.floor(Math.random() * (10 - 0) + 1)), (Math.floor(Math.random() * (10 - 0) + 1))  ];
 
   // Movement functionality
 
@@ -47,13 +47,13 @@ function Rover(pos, dir) {
     var xAxis = 0;
     var yAxis = 0;
 
-    if(rover.dir === 'north') {
+    if(rover.dir === 'n') {
       yAxis  = 1;
-    } else if(rover.dir === 'south') {
+    } else if(rover.dir === 's') {
       yAxis = -1;
-    } else if(rover.dir === 'west') {
+    } else if(rover.dir === 'w') {
       xAxis = -1;
-    } else if(rover.dir === 'east') {
+    } else if(rover.dir === 'e') {
       xAxis = +1;
     }
 
@@ -66,6 +66,9 @@ function Rover(pos, dir) {
     rover.pos[1] += yAxis;
 
     rover.obstacleCheck();
+    rover.victoryCheck();
+
+    console.log('Wall_E is now at ' + rover.pos + ' facing ' + rover.dir);
 
   }
 
@@ -75,30 +78,32 @@ function Rover(pos, dir) {
 
     var rightTurn = command === 'r';
     var leftTurn = command === 'l';
-    var northFace = rover.dir === 'north';
-    var eastFace = rover.dir === 'east';
-    var southFace = rover.dir === 'south';
-    var westFace = rover.dir === 'west';
+    var northFace = rover.dir === 'n';
+    var eastFace = rover.dir === 'e';
+    var southFace = rover.dir === 's';
+    var westFace = rover.dir === 'w';
 
     if(rightTurn && northFace) {
-      rover.dir = 'east';
+      rover.dir = 'e';
     } else if(rightTurn && eastFace) {
-      rover.dir = 'south';
+      rover.dir = 's';
     } else if(rightTurn && southFace) {
-      rover.dir = 'west';
+      rover.dir = 'w';
     } else if(rightTurn && westFace) {
-      rover.dir = 'north';
+      rover.dir = 'n';
     };
 
     if(leftTurn && northFace) {
-      rover.dir = 'west';
+      rover.dir = 'w';
     } else if(leftTurn && eastFace) {
-      rover.dir = 'north';
+      rover.dir = 'n';
     } else if(leftTurn && southFace) {
-      rover.dir = 'east';
+      rover.dir = 'e';
     } else if(leftTurn && westFace) {
-      rover.dir = 'south';
+      rover.dir = 's';
     };
+
+    console.log('Wall_E is now facing ' + rover.dir);
 
   }
 
@@ -107,15 +112,25 @@ function Rover(pos, dir) {
   this.obstacleCheck = function() {
 
     if(rover.obstacle.toString() === rover.pos.toString()) {
-      console.log('An obstacle has been found. Please find another route.');
+      alert('An obstacle has been found. Please find another route.');
       rover.movement('b');
     }
 
-  }
+  };
+
+  // Victory check functionality
+
+  this.victoryCheck = function() {
+
+    if(rover.victory.toString() === rover.pos.toString()) {
+      alert('You have found EVE!');
+    }
+
+  };
 
 
 }; // End of object constructor
 
 
 // Creation/tests
-var wall_E = new Rover([0, 0], 'north');
+var wall_E = new Rover([0, 0], 'n');
