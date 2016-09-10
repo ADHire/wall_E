@@ -65,6 +65,7 @@ function Rover(pos, dir) {
     rover.pos[0] += xAxis;
     rover.pos[1] += yAxis;
 
+    rover.scramble();
     rover.obstacleCheck();
     rover.victoryCheck();
 
@@ -127,6 +128,16 @@ function Rover(pos, dir) {
     }
 
   };
+
+  // Scrambles the victory coordinates if they match the obstacle coordinates
+
+  this.scramble = function() {
+
+    if(rover.victory.toString() === rover.obstacle.toString()) {
+      rover.victory = [ (Math.floor(Math.random() * (10 - 0) + 1)), (Math.floor(Math.random() * (10 - 0) + 1))  ];
+    }
+
+  }
 
 
 }; // End of object constructor
