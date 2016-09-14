@@ -5,20 +5,16 @@ function Rover(pos, dir) {
   rover = this;
 
   // Assigns our rover's position
-
   this.pos = pos || [0, 0];
 
   // Assigns our rover's direction
-
   this.dir = dir || 'n';
 
   // Max grid size allowed currently
-
   this.gridX = [-20, 20];
   this.gridY = [-20, 20];
 
   // Function to accept an array of commands and run the rover's commands
-
   this.command = function(commands) {
 
     var commandList = commands.toString('');
@@ -38,28 +34,30 @@ function Rover(pos, dir) {
   };
 
   // Created an array for the obstacle. Code to randomize a location is below
-
   this.obstacle = [ (Math.floor(Math.random() * (10 - 0) + 1)), (Math.floor(Math.random() * (10 - 0) + 1)) ];
 
   // Created a victory point
-
   this.victory = [ (Math.floor(Math.random() * (10 - 0) + 1)), (Math.floor(Math.random() * (10 - 0) + 1))  ];
 
   // Movement functionality
-
   this.movement = function(command) {
 
     var xAxis = 0;
     var yAxis = 0;
 
-    if(rover.dir === 'n') {
-      yAxis  = 1;
-    } else if(rover.dir === 's') {
+    var northFace = rover.dir === 'n';
+    var eastFace = rover.dir === 'e';
+    var southFace = rover.dir === 's';
+    var westFace = rover.dir === 'w';
+
+    if(northFace) {
+      yAxis = 1;
+    } else if(southFace) {
       yAxis = -1;
-    } else if(rover.dir === 'w') {
+    } else if(westFace) {
       xAxis = -1;
-    } else if(rover.dir === 'e') {
-      xAxis = +1;
+    } else if(eastFace) {
+      xAxis = 1;
     }
 
     if(command === 'b') {
@@ -70,17 +68,16 @@ function Rover(pos, dir) {
     rover.pos[0] += xAxis;
     rover.pos[1] += yAxis;
 
-    rover.edge();
+    rover.wrap();
     rover.scramble();
     rover.obstacleCheck();
     rover.victoryCheck();
 
     console.log('Wall_E is now at ' + '[' + rover.pos[0] + ', ' + rover.pos[1] + ']' + ' facing ' + rover.dir);
 
-  };
+  }; // End of Movement
 
   // Turning functionality
-
   this.turning = function(command) {
 
     var rightTurn = command === 'r';
@@ -112,10 +109,9 @@ function Rover(pos, dir) {
 
     console.log('Wall_E is now facing ' + rover.dir);
 
-  };
+  }; // End of Turning
 
   // Obstacle check functionality
-
   this.obstacleCheck = function() {
 
     if(rover.obstacle.toString() === rover.pos.toString()) {
@@ -123,62 +119,47 @@ function Rover(pos, dir) {
       rover.movement('b');
     }
 
-  };
+  }; // End of Obstacle
 
   // Victory check functionality
-
   this.victoryCheck = function() {
 
     if(rover.victory.toString() === rover.pos.toString()) {
       alert('You have found EVE!');
     }
 
-  };
+  }; // End of Victory
 
   // Scrambles the victory coordinates if they match the obstacle coordinates
-
   this.scramble = function() {
 
     if(rover.victory.toString() === rover.obstacle.toString()) {
       rover.victory = [ (Math.floor(Math.random() * (10 - 0) + 1)), (Math.floor(Math.random() * (10 - 0) + 1))  ];
     }
 
-  };
+  }; // End of Scramble
 
-  // Edge of map functionality
-
-  this.edge = function() {
+  // 'Wrapping'? I think? Hard to wrap a square grid on a sphere.
+  this.wrap = function() {
 
     if(rover.pos[0] > rover.gridX[1] && rover.dir === 'e') {
-      console.log('Cannot move forwards off the map. Turning you around.');
-      rover.dir = 'w';
-      rover.movement('f');
+      rover.pos[0] = rover.gridX[0];
     } else if(rover.pos[0] > rover.gridX[1] && rover.dir === 'w') {
-      console.log('Cannot back up any more. Please move forward');
-      rover.movement('f');
+      rover.pos[0] = rover.gridX[0];
     } else if(rover.pos[0] < rover.gridX[0] && rover.dir === 'w') {
-      console.log('Cannot move forwards off the map. Turning you around.');
-      rover.dir = 'e';
-      rover.movement('f');
+      rover.pos[0] = rover.gridX[1];
     } else if(rover.pos[0] < rover.gridX[0] && rover.dir === 'e') {
-      console.log('Cannot back up any more. Please move forward');
-      rover.movement('f');
+      rover.pos[0] = rover.gridX[1];
     }
 
     if(rover.pos[1] > rover.gridY[1] && rover.dir === 'n') {
-      console.log('Cannot move forwards off the map. Turning you around.');
-      rover.dir = 's';
-      rover.movement('f');
+      rover.pos[1] = rover.gridY[0];
     } else if(rover.pos[1] > rover.gridY[1] && rover.dir === 's') {
-      console.log('Cannot back up any more. Please move forward');
-      rover.movement('f');
+      rover.pos[1] = rover.gridY[0];
     } else if(rover.pos[1] < rover.gridY[0] && rover.dir === 's') {
-      console.log('Cannot move forwards off the map. Turning you around.');
-      rover.dir = 'n';
-      rover.movement('f');
+      rover.pos[1] = rover.gridY[1];
     } else if(rover.pos[1] < rover.gridY[0] && rover.dir === 'n') {
-      console.log('Cannot back up any more. Please move forward');
-      rover.movement('f');
+      rover.pos[1] = rover.gridY[1];
     }
 
   };
