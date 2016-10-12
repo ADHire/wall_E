@@ -114,26 +114,64 @@ function Rover(pos, dir) {
   // Obstacle check functionality
   this.obstacleCheck = function() {
 
-    if(rover.obstacle.toString() === rover.pos.toString()) {
-      alert('An obstacle has been found. Please find another route.');
-      rover.movement('b');
+    var counter = 0;
+
+    for(var i = 0; i < rover.pos.length; i++) {
+
+      for(var k = 0; k < rover.obstacle.length; k++) {
+
+        if(rover.pos[i] === rover.obstacle[k]) {
+          counter ++;
+        }
+
+      }
     }
 
+    if(counter === 2) {
+      console.log('fall back brotha!');
+
+    }
   }; // End of Obstacle
 
   // Victory check functionality
   this.victoryCheck = function() {
 
-    if(rover.victory.toString() === rover.pos.toString()) {
-      alert('You have found EVE!');
+    var counter = 0;
+
+    for(var i = 0; i < rover.pos.length; i++) {
+
+      for(var k = 0; k < rover.victory.length; k++) {
+
+        if(rover.pos[i] === rover.victory[k]) {
+          counter ++;
+        }
+
+      }
     }
 
+    if(counter === 2) {
+      console.log('You have found Eve!!!');
+
+    }
   }; // End of Victory
 
   // Scrambles the victory coordinates if they match the obstacle coordinates
   this.scramble = function() {
 
-    if(rover.victory.toString() === rover.obstacle.toString()) {
+    var counter = 0;
+
+    for(var i = 0; i < rover.obstacle.length; i++) {
+
+      for(var k = 0; k < rover.victory.length; k++) {
+
+        if(rover.obstacle[i] === rover.victory[k]) {
+          counter ++;
+        }
+
+      }
+    }
+
+    if(counter === 2) {
       rover.victory = [ (Math.floor(Math.random() * (10 - 0) + 1)), (Math.floor(Math.random() * (10 - 0) + 1))  ];
     }
 
@@ -163,5 +201,9 @@ function Rover(pos, dir) {
     }
 
   };
+
+  console.log(rover.obstacle);
+  console.log(rover.victory);
+  console.log(rover.pos);
 
 } // End of object prototype
