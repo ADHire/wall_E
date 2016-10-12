@@ -129,8 +129,8 @@ function Rover(pos, dir) {
 
     if(counter === 2) {
       console.log('fall back brotha!');
-
     }
+
   }; // End of Obstacle
 
   // Victory check functionality
@@ -151,8 +151,8 @@ function Rover(pos, dir) {
 
     if(counter === 2) {
       console.log('You have found Eve!!!');
-
     }
+
   }; // End of Victory
 
   // Scrambles the victory coordinates if they match the obstacle coordinates
